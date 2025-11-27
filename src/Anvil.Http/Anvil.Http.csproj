@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>AnvilHttp</AssemblyName>
+
+    <Version>1.0.0-beta</Version>                 
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>   
+    <FileVersion>1.0.0.0</FileVersion>           
+    <AssemblyInformationalVersion>1.0.0-beta</AssemblyInformationalVersion>
+    <AssemblyName>$(AssemblyName)-$(Version)</AssemblyName>
+    
+    <AssemblyProduct>AnvilHttp</AssemblyProduct>
+    <AssemblyCompany>Rouis Abdelkader</AssemblyCompany>
+    <AssemblyDescription>High-performance HTTP request parser for .NET using zero-copy span-based parsing</AssemblyDescription>
+    
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin/$(Configuration)/$(TargetFramework)/$(AssemblyName).xml</DocumentationFile>
+  
+    <PackageId>AnvilHttp</PackageId>
+    <Authors>Rouis Abdelkader</Authors>
+    <Company>Rouis Abdelkader</Company>
+    
+    <Description>High-performance HTTP request parser for .NET</Description>
+    <PackageTags>http;parser;performance;web;anvil</PackageTags>
+    
+    <PackageProjectUrl>https://github.com/rouisaek22/anvil-http.git</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/rouisaek22/anvil-http.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    
+    <Copyright>Copyright © Rouis Abdelkader 2025</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>
