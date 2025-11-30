@@ -76,7 +76,7 @@ dotnet build -c Release
 
 For a detailed explanation of how the two-phase architecture works (buffering and parsing), see:
 
-- **[FLOW.md](./FLOW.md)** — Comprehensive guide to the accumulator and parser flow, state machine transitions, and end-to-end examples with ASCII diagrams.
+- **[FLOW.md](./docs/FLOW.md)** — Comprehensive guide to the accumulator and parser flow, state machine transitions, and end-to-end examples with ASCII diagrams.
 - **[CHANGELOG.md](./CHANGELOG.md)** — Version history and feature tracking.
 
 ## Notes
