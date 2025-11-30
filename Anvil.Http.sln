@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{B3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintRequestToConsole", "examples\PrintRequestToConsole\PrintRequestToConsole.csproj", "{15BDD7F3-6AAA-4DE6-BD7C-963330BE620E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnvilServerExample", "examples\AnvilServerExample\AnvilServerExample.csproj", "{341E2872-52E3-4D2B-93D6-5EE119320538}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,18 @@ Global
 		{15BDD7F3-6AAA-4DE6-BD7C-963330BE620E}.Release|x64.Build.0 = Release|Any CPU
 		{15BDD7F3-6AAA-4DE6-BD7C-963330BE620E}.Release|x86.ActiveCfg = Release|Any CPU
 		{15BDD7F3-6AAA-4DE6-BD7C-963330BE620E}.Release|x86.Build.0 = Release|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Debug|x64.Build.0 = Debug|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Debug|x86.Build.0 = Debug|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Release|x64.ActiveCfg = Release|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Release|x64.Build.0 = Release|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Release|x86.ActiveCfg = Release|Any CPU
+		{341E2872-52E3-4D2B-93D6-5EE119320538}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,5 +100,6 @@ Global
 		{B884B1DB-EA44-4866-9CAC-17E5DE5DF59D} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{C4F44C4F-7175-4CCD-8DED-B81B401B6CA2} = {760AB15A-8938-8D9B-BEDE-5CE1484B84C3}
 		{15BDD7F3-6AAA-4DE6-BD7C-963330BE620E} = {B36A84DF-456D-A817-6EDD-3EC3E7F6E11F}
+		{341E2872-52E3-4D2B-93D6-5EE119320538} = {B36A84DF-456D-A817-6EDD-3EC3E7F6E11F}
 	EndGlobalSection
 EndGlobal

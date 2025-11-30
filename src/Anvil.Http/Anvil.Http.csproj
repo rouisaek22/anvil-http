@@ -6,10 +6,10 @@
     <Nullable>enable</Nullable>
     <AssemblyName>AnvilHttp</AssemblyName>
 
-    <Version>1.0.0-beta</Version>                 
+    <Version>1.0.0-beta-1</Version>                 
     <AssemblyVersion>1.0.0.0</AssemblyVersion>   
     <FileVersion>1.0.0.0</FileVersion>           
-    <AssemblyInformationalVersion>1.0.0-beta</AssemblyInformationalVersion>
+    <AssemblyInformationalVersion>1.0.0-beta-1</AssemblyInformationalVersion>
     <AssemblyName>$(AssemblyName)-$(Version)</AssemblyName>
     
     <AssemblyProduct>AnvilHttp</AssemblyProduct>
@@ -36,8 +36,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="" />
-    <None Include="LICENSE" Pack="true" PackagePath="" />
+    <None Include="../../README.md" Pack="true" PackagePath="" />
+    <None Include="../../LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.xml</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
 
 </Project>

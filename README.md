@@ -22,30 +22,46 @@ High-performance HTTP request parser for .NET using zero-copy, span-based parsin
 
 ## Quick Usage
 
+`SpanBasedHttpParser` and `HttpRequestAccumulator` work together as a system:
+- **HttpRequestAccumulator**: Buffers incoming data chunks and tracks parsing state until a complete HTTP request is received
+- **SpanBasedHttpParser**: Parses the accumulated complete request into structured components
+
 ```csharp
-using System.Text;
-using Anvil.Http.Parsing;
+// Server Loop - Accumulator buffers data, Parser processes complete requests
+private async Task ProcessRequestAsync(NetworkStream stream)
+    {
+        using var accumulator = new HttpRequestAccumulator();
+        byte[] buffer = _pool.Rent(4096);
+        try
+        {
+            int read;
+            while ((read = await stream.ReadAsync(buffer)) != 0)
+            {
+                // Accumulator buffers incoming chunks and detects when complete
+                var result = accumulator.Accumulate(buffer.AsSpan(0, read));
+                if (result == AccumulatorResult.Complete)
+                {
+                    // Get the complete accumulated request
+                    var completeRequest = accumulator.GetAccumulatedData().ToArray();
+                    Console.WriteLine($"Complete request: {completeRequest.Length} bytes");
 
-// Suppose `raw` is a byte[] containing a full HTTP request
-ReadOnlySpan<byte> rawSpan = raw;
+                    // Parser processes the complete request
+                    var parsedRequest = SpanBasedHttpParser.Parse(completeRequest);
+                    
+                    // Map to Request object and handle
+                    Request request = MapSpanToRequest(parsedRequest);
+                    await HandleRouteAsync(request, stream);
 
-var parsed = SpanBasedHttpParser.Parse(rawSpan);
-
-Console.WriteLine(parsed.RequestLine.MethodString());
-Console.WriteLine(parsed.RequestLine.PathString());
-Console.WriteLine(parsed.RequestLine.VersionString());
-
-foreach (var h in parsed.Headers)
-{
-    Console.WriteLine($"{Encoding.ASCII.GetString(h.Name)}: {Encoding.ASCII.GetString(h.Value)}");
-}
-
-if (!parsed.Body.IsEmpty)
-{
-    // handle body (e.g., convert to string for text payloads)
-    var bodyText = Encoding.UTF8.GetString(parsed.Body);
-    Console.WriteLine(bodyText);
-}
+                    // Reset accumulator for next request
+                    accumulator.Reset();
+                }
+            }
+        }
+        finally
+        {
+            _pool.Return(buffer);
+        }
+    }
 ```
 
 ## Build
@@ -55,6 +71,13 @@ From the `src/Anvil.Http` directory:
 ```bash
 dotnet build -c Release
 ```
+
+## Documentation
+
+For a detailed explanation of how the two-phase architecture works (buffering and parsing), see:
+
+- **[FLOW.md](./FLOW.md)** — Comprehensive guide to the accumulator and parser flow, state machine transitions, and end-to-end examples with ASCII diagrams.
+- **[CHANGELOG.md](./CHANGELOG.md)** — Version history and feature tracking.
 
 ## Notes
 
