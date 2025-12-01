@@ -5,7 +5,7 @@ using System.Text;
 using Anvil.Http.Parsing;
 
 // Simple TCP server that demonstrates using HttpRequestAccumulator + SpanBasedHttpParser
-// Run: dotnet run --project examples/PrintRequestToConsole
+// Run: dotnet run --project examples/AnvilServerExample
 
 const int Port = 3333;
 var listener = new TcpListener(IPAddress.Loopback, Port);
@@ -20,14 +20,12 @@ Console.CancelKeyPress += (_, e) =>
     Console.WriteLine("Stopping...");
 };
 
-var pool = ArrayPool<byte>.Shared;
-
 while (!cts.IsCancellationRequested)
 {
     try
     {
         var client = await listener.AcceptTcpClientAsync(cts.Token).ConfigureAwait(false);
-        _ = HandleClientAsync(client, pool); // fire-and-forget
+        _ = HandleClientAsync(client); // fire-and-forget
     }
     catch (OperationCanceledException)
     {
@@ -37,10 +35,11 @@ while (!cts.IsCancellationRequested)
 
 listener.Stop();
 
-async Task HandleClientAsync(TcpClient client, ArrayPool<byte> _pool)
+async Task HandleClientAsync(TcpClient client)
 {
     using (client)
     {
+        var _pool = ArrayPool<byte>.Shared;
         using var stream = client.GetStream();
         using var accumulator = new HttpRequestAccumulator();
         var buffer = _pool.Rent(4096);
@@ -49,10 +48,10 @@ async Task HandleClientAsync(TcpClient client, ArrayPool<byte> _pool)
             int read;
             while ((read = await stream.ReadAsync(buffer.AsMemory(0, buffer.Length))) != 0)
             {
-                var result = accumulator.Accumulate(buffer.AsSpan(0, read));
+                var result = accumulator.Accumulate(buffer);
                 if (result == AccumulatorResult.Complete)
                 {
-                    var completeRequest = accumulator.GetAccumulatedData().ToArray();
+                    var completeRequest = accumulator.GetAccumulatedData();
                     Console.WriteLine($"Complete request: {completeRequest.Length} bytes from {client.Client.RemoteEndPoint}");
 
                     var parsed = SpanBasedHttpParser.Parse(completeRequest);
